@@ -1,0 +1,14 @@
+<view class="content">
+	<view class="section">
+		<image class="section-icon" src="../../img/check.png"></image>
+		<view class="section-text">发布成功</view>
+	</view>
+	
+	<view class="section align-center just-center flex-box" bindtap="navigateToMiniProgram">
+		<image class="section-icon2" src="../../img/logo2.png"></image>
+		<view class="section-text2">
+			<view>点击进入蜜健</view>
+			<view>了解更多精彩</view>
+		</view>
+	</view>
+</view>

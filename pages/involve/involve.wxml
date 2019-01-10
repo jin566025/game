@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="content">
+		<view class="activity-content">
+			<view class="activity-section" wx:for="{{records}}" wx:key="{{item.id}}">
+				<view class="activity-section-top"  bindtap="toDetail"  data-showid="{{item.id}}" data-status="{{item.status}}">
+					<image class="activity-section-banner" src="{{item.bannerUrl}}"></image>
+					<view class="activity-section-text">{{item.playerNum}}人参与</view>
+					<view class="activity-section-btn {{item.status=='10' ? '':'activity-section-over'}}">{{item.status=="10" ? "进行中":"已结束"}}</view>
+				</view>
+				<view class="flex-box align-center activity-section-bottom">
+					<view class="activity-section-name text-over">{{item.showActiveTitle}}</view>
+					<view class="activity-section-time flex1">{{item.startDate}}-{{item.endDate}}</view>
+					<view class="activity-section-invitation">
+						<button open-type="share" data-showid="{{item.id}}" class="share-btn flex-box align-center" style="border: none;color: #328cff;" plain="true">
+							<image class="activity-section-icon" src="../../img/invitation.png"></image>邀请好友
+						</button>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="height: 60rpx;line-height:60rpx;width: 100%;text-align: center;font-size: 24rpx;color: #838383;" wx:if="{{!hasdata && records.length>10}}">----下面没有了----</view>
+</view>

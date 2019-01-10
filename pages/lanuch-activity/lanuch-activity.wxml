@@ -1,0 +1,41 @@
+<view class="content">
+	<view class="content-bg">
+		<view class="content-bg-title">简洁活跃</view>
+		<view class="content-bg-desc">从积木的基本造型出发</view>
+		<view class="content-bg-desc">一切可能性都来自用户对我们的期许</view>
+		<view class="content-bg-desc">和丰富的想象力</view>
+	</view>
+	<view class="shadow"></view>
+	<view class="dialog">
+		<view class="dialog-content">
+			<view class="dialog-inputs flex-box box-sizing align-center">
+				<view class="dialog-inputs-left">自定义标题: </view>
+				<input class="dialog-inputs-right flex1 box-sizing" type="text" value="{{showActiveTitle}}" bindchange="showActiveTitleChange" />
+			</view>
+
+			<view class="dialog-inputs flex-box box-sizing align-center">
+				<view class="dialog-inputs-left">最大人数: </view>
+				<input class="dialog-inputs-right flex1 box-sizing" type="number" value="{{maxUserNum}}" bindchange="maxUserNumChange" />
+			</view>
+
+			<view class="dialog-inputs flex-box box-sizing align-center">
+				<view class="dialog-inputs-left">每次参与次数: </view>
+				<input class="dialog-inputs-right flex1 box-sizing" type="number" value="{{userPerPlayNum}}" bindchange="userPerPlayNumChange" />
+			</view>
+
+			<view class="dialog-inputs flex-box box-sizing align-center">
+				<view class="dialog-inputs-left">活动时间: </view>
+				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindDateChange" value="{{startDate}}" mode="date" start="{{nowDate}}">{{startDate}}</picker>
+				—
+				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindTimeChange" value="{{startTime}}" mode="time">{{startTime}}</picker>
+			</view>
+			<view class="dialog-inputs flex-box box-sizing align-center">
+				<view class="dialog-inputs-left">活动时间: </view>
+				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindDateChange2" value="{{endDate}}" mode="date" start="{{nowDate}}">{{endDate}}</picker>
+				—
+				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindTimeChange2" value="{{endTime}}" mode="time">{{endTime}}</picker>
+			</view>
+			<view class="dialog-btn" bindtap="publish">发起活动</view>
+		</view>
+	</view>
+</view>

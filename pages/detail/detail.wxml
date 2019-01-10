@@ -1,0 +1,27 @@
+<view class="content">
+	<image src="../../img/bg.png" class="bg-img"></image>
+	
+	<view class="main">
+		<view class="number box-sizing">剩余次数：{{userRemainNum}}</view>
+		<view class="text1">请从下方祝福语中</view>
+		<view class="text1">选择您要发送的话</view>
+		
+		<view class="sections">
+			<view class="section" wx:for="{{happy}}" wx:key="{{index}}" data-index="{{index}}" bindtap="check">
+				<image src="{{index==currentIndex ? '../../img/btn3.png':'../../img/btn2.png'}}" class="section-img"></image>
+				<view class="section-text">{{item}}</view>
+			</view>
+		</view>
+		
+		<view class="form flex-box align-center">
+			<image class="form-icon" src="../../img/write.png"></image>
+			<view class="form-plac">自己写弹幕：</view>
+			<input type="text" bindinput="formInput" class="form-input flex1" />
+		</view>
+		
+		<view class="finish-btn" bindtap="sendHappy">
+			<image src="../../img/btn1.png" class="finish-img"></image>
+			<view class="finish-text">发送弹幕</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,4 @@
+<!--pages/login/login.wxml-->
+<view>
+	<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击授权登录小程序</button>
+</view>

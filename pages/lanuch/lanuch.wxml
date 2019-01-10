@@ -1,0 +1,49 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="content">
+		<view class="activity-content">
+			<view class="activity-section" wx:for="{{records}}" wx:key="{{item.id}}">
+				<view class="activity-section-top"  bindtap="toDetail" data-hasstart="{{item.hasStart}}"  data-showid="{{item.id}}" data-status="{{item.status}}">
+					<image class="activity-section-banner" src="{{item.bannerUrl}}"></image>
+					<view class="activity-section-text">{{item.playerNum}}人参与</view>
+					<view wx:if="{{item.hasStart}}" class="activity-section-btn {{item.status=='10' ? '':'activity-section-over'}}">{{item.status=="10" ? "进行中":"已结束"}}</view>
+					<view wx:else class="activity-section-btn activity-section-over">未开始</view>
+				</view>
+				<view class="flex-box align-center activity-section-mid">
+					<view class="activity-section-name text-over">{{item.showActiveTitle}}</view>
+					<view class="activity-section-time flex1">{{item.startDate2}}-{{item.endDate2}}</view>
+					<image  wx:if="{{item.status==10}}" class="activity-section-icon" src="../../img/close.png" bindtap="showActiveClose" data-showid="{{item.id}}"></image>
+					<view  wx:if="{{item.status==10}}" class="activity-section-invitation" bindtap="showActiveClose" data-showid="{{item.id}}">关闭</view>
+				</view>
+				<view class="activity-section-bottom flex-box align-center just-center">
+					<view class="flex-box align-center activity-section-bottom-part" wx:if="{{item.status==10}}">
+						<view class="activity-section-invitation">
+							<button open-type="share" data-showid="{{item.id}}" class="share-btn flex-box align-center" style="border: none;color: #328cff;" plain="true">
+								<image class="activity-section-icon" src="../../img/invitation.png"></image>邀请好友
+							</button>
+						</view>
+					</view>
+					<view class="flex-box align-center activity-section-bottom-part">
+						<image class="activity-section-bottom-icon" src="../../img/lookback.png"></image>
+						<view class="activity-section-bottom-text" bindtap="dialogShow" data-showid="{{item.id}}">查看后台</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="height: 60rpx;line-height:60rpx;width: 100%;text-align: center;font-size: 24rpx;color: #838383;" wx:if="{{!hasdata && records.length>10}}">----下面没有了----</view>
+	
+	
+	<view class="shadow" wx:if="{{dialog}}"></view>
+	<view class="dialog" wx:if="{{dialog}}">
+		<view class="dialog-content">
+			<view class="dialog-text">请复制到电脑浏览器打开</view>
+			<view class="align-center flex-box dialog-copy box-sizing">
+				<view class="dialog-address">https://5782426-Light-Themed-UI/</view>
+				<view class="dialog-copybtn" bindtap="getClipboardData">复制</view>
+			</view>
+			<view class="dialog-btn"  bindtap="dialogShow">确定</view>
+		</view>
+	</view>
+	
+</view>

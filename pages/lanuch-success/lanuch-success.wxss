@@ -1,0 +1,6 @@
+.section{width: 600rpx;margin: 0 auto;height: 186rpx;text-align: center;box-shadow: 0px 2px 26px 0px rgba(50, 140, 255, 0.16);border-radius: 13rpx;margin-top: 55rpx;}
+.section-icon{width: 70rpx;height: 70rpx;margin: 36rpx 0 10rpx 0;}
+.section-text{color: #587af9;font-size: 34rpx;}
+
+.section-icon2{width: 100rpx;height: 100rpx;margin-right: 45rpx;}
+.section-text2{color: #0fd991;font-size: 30rpx;line-height: 40rpx;width: 210rpx;}

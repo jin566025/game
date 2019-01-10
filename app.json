@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/involve/involve",
+    "pages/lanuch/lanuch",
+    "pages/lanuch-activity/lanuch-activity",
+    "pages/lanuch-success/lanuch-success",
+    "pages/detail/detail",
+    "pages/login/login"
+  ],
+	"navigateToMiniProgramAppIdList":[
+    "wxc3378771b49e2128"
+
+	],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#0fd991",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "img/nav1.png",
+        "selectedIconPath": "img/nav1-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/involve/involve",
+        "iconPath": "img/nav2.png",
+        "selectedIconPath": "img/nav2-active.png",
+        "text": "我参与的"
+      },
+      {
+        "pagePath": "pages/lanuch/lanuch",
+        "iconPath": "img/nav3.png",
+        "selectedIconPath": "img/nav3-active.png",
+        "text": "我发起的"
+      }
+    ]
+  }
+}
