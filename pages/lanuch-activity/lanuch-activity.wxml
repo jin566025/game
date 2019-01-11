@@ -10,7 +10,7 @@
 		<view class="dialog-content">
 			<view class="dialog-inputs flex-box box-sizing align-center">
 				<view class="dialog-inputs-left">自定义标题: </view>
-				<input class="dialog-inputs-right flex1 box-sizing" type="text" value="{{showActiveTitle}}" bindchange="showActiveTitleChange" />
+				<input placeholder="请输入标题" class="dialog-inputs-right flex1 box-sizing" type="text" value="{{showActiveTitle}}" bindchange="showActiveTitleChange" />
 			</view>
 
 			<view class="dialog-inputs flex-box box-sizing align-center">
@@ -27,7 +27,7 @@
 				<view class="dialog-inputs-left">活动时间: </view>
 				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindDateChange" value="{{startDate}}" mode="date" start="{{nowDate}}">{{startDate}}</picker>
 				—
-				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindTimeChange" value="{{startTime}}" mode="time">{{startTime}}</picker>
+				<picker class="dialog-inputs-right dates flex1 box-sizing" bindchange="bindTimeChange" value="{{startTime}}" mode="time" >{{startTime}}</picker>
 			</view>
 			<view class="dialog-inputs flex-box box-sizing align-center">
 				<view class="dialog-inputs-left">活动时间: </view>

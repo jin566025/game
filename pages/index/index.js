@@ -17,7 +17,11 @@ Page({
       url: '../logs/logs'
     })
   },
-	
+	toIndex:function(){
+		wx.navigateTo({
+		  url: '../login/login'
+		})
+	},
 	toDetail:function(e){
 		let showid = e.currentTarget.dataset.showid;
 		let status = e.currentTarget.dataset.status;
@@ -38,8 +42,9 @@ Page({
 	toLanuch:function(e){
 		let showid = e.currentTarget.dataset.showid;
 		let title = e.currentTarget.dataset.title;
+		let enddate = e.currentTarget.dataset.enddate;
 		wx.navigateTo({
-		  url: '../lanuch-activity/lanuch-activity?showid='+showid+'&title='+title
+		  url: '../lanuch-activity/lanuch-activity?showid='+showid+'&title='+title+'&enddate='+enddate
 		})
 	},
 	showPage:function(pageNum){
@@ -69,6 +74,7 @@ Page({
 				list.map(item=>{
 						item.startDate = item.startDate.substring(0,10);
 						item.startDate = item.startDate.replace(/-/g,'.');
+						item.endDate2 = item.endDate;
 						item.endDate = item.endDate.substring(0,10);
 						item.endDate = item.endDate.replace(/-/g,'.')
 				})

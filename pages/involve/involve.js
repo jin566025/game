@@ -55,14 +55,15 @@ Page({
 				wx.hideLoading();
 			}else{
 				wx.showToast({
-				  title:res.data.message,
+				  title:res.data.message+"，3S后自动登录",
 				  icon:"none",
-				  duration:2000,
+				  duration:3000,
 				  success:function(res){
 					  wx.clearStorageSync()
-					  wx.switchTab({
-						url: '../index/index'
-					  })
+					  util.login()
+					  setTimeout(()=>{
+						  that.pageUserJoin(pageNum)
+					  },3000)
 				  }
 				})
 			}
@@ -105,9 +106,11 @@ Page({
   onShow: function () {
 	let that = this;
 	let pageNum = that.data.pageNum;
-	that.pageUserJoin(pageNum)
 	
-	util.login()
+	
+	util.login().then(()=>{
+		that.pageUserJoin(pageNum)
+	})
   },
 
   /**

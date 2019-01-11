@@ -2,6 +2,7 @@
 <view class="container">
 	<view class="content">
 		<view class="activity-content">
+			<image  wx:if="{{records.length==0}}" class="nodata" src="../../img/nodata.png" ></image>
 			<view class="activity-section" wx:for="{{records}}" wx:key="{{item.id}}">
 				<view class="activity-section-top"  bindtap="toDetail"  data-showid="{{item.id}}" data-status="{{item.status}}">
 					<image class="activity-section-banner" src="{{item.bannerUrl}}"></image>

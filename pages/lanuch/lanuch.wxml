@@ -2,6 +2,7 @@
 <view class="container">
 	<view class="content">
 		<view class="activity-content">
+			<image  wx:if="{{records.length==0}}" class="nodata" src="../../img/nodata.png" ></image>
 			<view class="activity-section" wx:for="{{records}}" wx:key="{{item.id}}">
 				<view class="activity-section-top"  bindtap="toDetail" data-hasstart="{{item.hasStart}}"  data-showid="{{item.id}}" data-status="{{item.status}}">
 					<image class="activity-section-banner" src="{{item.bannerUrl}}"></image>
@@ -25,7 +26,7 @@
 					</view>
 					<view class="flex-box align-center activity-section-bottom-part">
 						<image class="activity-section-bottom-icon" src="../../img/lookback.png"></image>
-						<view class="activity-section-bottom-text" bindtap="dialogShow" data-showid="{{item.id}}">查看后台</view>
+						<view class="activity-section-bottom-text" bindtap="dialogShow" data-uuid="{{item.uuid}}">查看后台</view>
 					</view>
 				</view>
 			</view>
@@ -39,7 +40,7 @@
 		<view class="dialog-content">
 			<view class="dialog-text">请复制到电脑浏览器打开</view>
 			<view class="align-center flex-box dialog-copy box-sizing">
-				<view class="dialog-address">https://5782426-Light-Themed-UI/</view>
+				<view class="dialog-address text-over">https://game.51tjs.cn/index.html#/index?uuid={{uuid}}</view>
 				<view class="dialog-copybtn" bindtap="getClipboardData">复制</view>
 			</view>
 			<view class="dialog-btn"  bindtap="dialogShow">确定</view>

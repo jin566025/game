@@ -9,7 +9,8 @@ Page({
 		dialog:false,
 		pageNum:1,
 		records:[],
-		hasdata:true
+		hasdata:true,
+		uuid:""
   },
   toDetail:function(e){
   	let showid = e.currentTarget.dataset.showid;
@@ -34,14 +35,20 @@ Page({
   		})
   	}
   },
-  dialogShow:function(){
+  dialogShow:function(e){
+	    let uuid = e.currentTarget.dataset.uuid;
+		if(!uuid){
+			uuid=""
+		}
 		this.setData({
-			dialog:!this.data.dialog
+			dialog:!this.data.dialog,
+			uuid:uuid
 		})
   },
   getClipboardData:function(){
+		let uuid = this.data.uuid;
 		wx.setClipboardData({
-			data: 'https://5782426-Light-Themed-UI/',
+			data: 'https://game.51tjs.cn/index.html#/index?uuid='+uuid,
 			success(res) {
 				
 			}
@@ -124,14 +131,15 @@ Page({
 					wx.hideLoading();
 				}else{
 					wx.showToast({
-					  title:res.data.message,
+					  title:res.data.message+"，3S后自动登录",
 					  icon:"none",
-					  duration:2000,
+					  duration:3000,
 					  success:function(res){
 						  wx.clearStorageSync()
-						  wx.switchTab({
-							url: '../index/index'
-						  })
+						  util.login()
+						  setTimeout(()=>{
+						  	 that.showActivePage(1)
+						  },3000)
 					  }
 					})
 				}
@@ -162,8 +170,10 @@ Page({
 	that.setData({
 		hasData:true
 	})
-	that.showActivePage(1)
-	util.login()
+	
+	util.login().then(()=>{
+		that.showActivePage(1)
+	})
   },
 
   /**

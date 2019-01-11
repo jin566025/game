@@ -1,4 +1,8 @@
 <!--pages/login/login.wxml-->
 <view>
-	<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击授权登录小程序</button>
+	<image class="login-bg" src="../../img/login-bg.png"></image>
+	<button class="login-btn flex-box align-center just-center absolute-center" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+		<image class="wx-logo" src="../../img/wx.png"></image>
+		微信登录
+	</button>
 </view>

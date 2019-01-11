@@ -20,7 +20,8 @@ Page({
 	],
 	currentIndex:-1,
 	showActiveId:"",
-	userRemainNum:""
+	userRemainNum:"",
+	canclcik:true
   },
   check:function(e){
 	  let index = e.currentTarget.dataset.index;
@@ -37,45 +38,62 @@ Page({
   },
   sendHappy:function(){
 	  let that = this;
-	  
-	  let content="";
-	  let params = {};
-	  let currentIndex = that.data.currentIndex;
-	  if(currentIndex!==-1){
-		  content = that.data.happy[currentIndex]
-	  }else{
-		  content = that.data.content
-	  }
-	  if(content){
-		  params.content = content
+	  let canclcik = that.data.canclcik;
+	  that.setData({
+	  	 canclcik:false
+	  })
+	  setTimeout(()=>{
+		  that.setData({
+			 canclcik:true
+		  })
+	  },3000)
+	  if(canclcik){
+		  let content="";
+		  let params = {};
+		  let currentIndex = that.data.currentIndex;
+		  if(currentIndex!==-1){
+		  		  content = that.data.happy[currentIndex]
+		  }else{
+		  		  content = that.data.content
+		  }
+		  if(content){
+		  		  params.content = content
+		  }else{
+		  		  wx.showToast({
+		  			  title:"请输入或选择祝福语",
+		  			  icon:"none",
+		  			  duration:2000
+		  		  })
+		  		  return false;
+		  }
+		  params.showActiveId = that.data.showActiveId;
+		  api.sendHappy(params).then(res=>{
+		  		  let result = res.data;
+		  		  if(result.success){
+		  			  wx.navigateTo({
+		  			    url: '../lanuch-success/lanuch-success'
+		  			  })
+		  		  }else{
+		  			  wx.showToast({
+		  				  title:result.message,
+		  				  icon:"none",
+		  				  duration:2000,
+		  				  success:function(res){
+		  					  wx.navigateTo({
+		  					    url: '../index/index'
+		  					  })
+		  				  }
+		  			  })
+		  		  }
+		  })
 	  }else{
 		  wx.showToast({
-			  title:"请输入或选择祝福语",
+			  title:"点击过于频繁，请稍后再试",
 			  icon:"none",
-			  duration:2000
+			  duration:3000
 		  })
-		  return false;
 	  }
-	  params.showActiveId = that.data.showActiveId;
-	  api.sendHappy(params).then(res=>{
-		  let result = res.data;
-		  if(result.success){
-			  wx.navigateTo({
-			    url: '../lanuch-success/lanuch-success'
-			  })
-		  }else{
-			  wx.showToast({
-				  title:result.message,
-				  icon:"none",
-				  duration:2000,
-				  success:function(res){
-					  wx.navigateTo({
-					    url: '../index/index'
-					  })
-				  }
-			  })
-		  }
-	  })
+	  
   },
   
   
@@ -103,7 +121,7 @@ Page({
 				}
 				let now = new Date().getTime();
 				 
-				 if(!token || expireDate<now || !expireDate){
+				if(!token || expireDate<now || !expireDate){
 					api.login(params).then(res=>{
 						let result = res.data;
 						console.log("login",res)
@@ -137,20 +155,22 @@ Page({
 	  let showActiveId = that.data.showActiveId;
 	  
 	  api.userShowActiveInfo({showActiveId:showActiveId}).then(res=>{
+		  console.log("result",res)
 		  if(res.data.success){
 			  that.setData({
 			  	userRemainNum:res.data.data.userRemainNum
 			  })
 		  }else{
 			  wx.showToast({
-			    title:res.data.message,
+			    title:res.data.message+"，3S后自动登录",
 			    icon:"none",
 			    duration:2000,
 			    success:function(res){
 			  	  wx.clearStorageSync()
-			  	  wx.switchTab({
-			  		url: '../index/index'
-			  	  })
+			  	  util.login()
+				  setTimeout(()=>{
+				  	 that.userShowActiveInfo()
+				  },3000)
 			    }
 			  })
 		  }
@@ -164,8 +184,6 @@ Page({
    */
   onLoad: function (options) {
 	let showActiveId = options.showid;
-	console.log("options",options)
-	console.log("showActiveId",showActiveId)
 	this.setData({
 		showActiveId:showActiveId
 	})
@@ -188,6 +206,7 @@ Page({
 		that.login(res.code)	
 	  }
 	})
+	
   },
 
   /**

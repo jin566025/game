@@ -10,7 +10,7 @@ Page({
   onGotUserInfo(e) {
 
 	if(e.detail.userInfo){
-		let showid = this.data.id;
+		let showid = this.data.url;
 		if(showid){
 			wx.navigateTo({
 			  url: '../detail/detail?showid='+showid
@@ -29,7 +29,7 @@ Page({
 	let url = options.id;
 	if(url){
 		this.setData({
-			url:id
+			url:url
 		})
 	}
   },

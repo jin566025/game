@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container">
 	<view class="content">
-		<view class="title flex-box align-center">
+		<view class="title flex-box align-center" >
 			<image src="../../img/activity.png" class="title-icon"></image>
 			可发起的活动
 		</view>
 		
 		<view class="activity-content">
 			<view class="activity-section" wx:for="{{records}}" wx:key="{{item.id}}">
-				<view class="activity-section-top" bindtap="toLanuch"  data-showid="{{item.id}}" data-title="{{item.showTitle}}"  data-status="{{item.status}}">
+				<view class="activity-section-top" bindtap="toLanuch"  data-showid="{{item.id}}" data-enddate="{{item.endDate2}}" data-title="{{item.showTitle}}"  data-status="{{item.status}}">
 					<image class="activity-section-banner" src="{{item.bannerUrl}}"></image>
 					<view class="activity-section-text">{{item.activeNum}}活动发起  {{item.playerNum}}参与</view>
 					
@@ -16,7 +16,7 @@
 				<view class="flex-box align-center activity-section-bottom">
 					<view class="activity-section-name">{{item.showTitle}}</view>
 					<view class="activity-section-time flex1">{{item.startDate}}-{{item.endDate}}</view>
-					<view class="activity-section-btn" bindtap="toLanuch" data-title="{{item.showTitle}}"   data-showid="{{item.id}}">发起</view>
+					<view class="activity-section-btn" bindtap="toLanuch" data-title="{{item.showTitle}}" data-enddate="{{item.endDate2}}"   data-showid="{{item.id}}">发起</view>
 				</view>
 			</view>
 		</view>

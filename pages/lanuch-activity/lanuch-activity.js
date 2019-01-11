@@ -62,9 +62,23 @@ Page({
 		let _showId = that.data.showId;
 		let _showActiveTitle = that.data.showActiveTitle;
 		let endDate = "";
+		let mustEndDate = that.data.mustEndDate;
+		mustEndDate = mustEndDate.replace(/-/g, '/');
+		mustEndDate = new Date(mustEndDate).getTime();
+		
 		if(_endDate && _endDate!=="结束日期" && _endTime && _endTime!=="结束时间"){
 			endDate = _endDate+" "+_endTime;
 			params.endDate = endDate;
+			endDate = endDate.replace(/-/g, '/');
+			endDate = new Date(endDate).getTime();
+			if(endDate>mustEndDate){
+				wx.showToast({
+					title:"设置的结束时间超出规定时间",
+					icon:'none',
+					duration:2000
+				})
+				return false;
+			}
 		}else{
 			wx.showToast({
 				title:"请选择结束日期和时间",
@@ -144,7 +158,13 @@ Page({
 					wx.showToast({
 						title:result.message,
 						icon:'none',
-						duration:2000
+						duration:2000,
+						  success:function(res){
+							  wx.clearStorageSync()
+							  wx.switchTab({
+								url: '../index/index'
+							  })
+						  }
 					})
 				}
 		})
@@ -157,11 +177,26 @@ Page({
 		let that = this;
 		let showId = options.showid;
 		let title = options.title;
-		that.setData({
-			showId:showId
-		})
+		let enddate = options.enddate;
 		wx.setNavigationBarTitle({
 		  title: title
+		})
+		
+		let nowDate = new Date();
+		let newDate = this.getDate(nowDate)
+		let newTime = this.getTime(nowDate)
+		nowDate = newDate+" "+newTime;
+		let endDate = enddate.substring(0,10);
+		let endTime = enddate.substring(11)
+		that.setData({
+			nowDate:newDate,
+			nowTime:newTime,
+			startDate:newDate,
+			startTime:newTime,
+			showId:showId,
+			endDate:endDate,
+			endTime:endTime,
+			mustEndDate:enddate
 		})
   },
 
@@ -176,17 +211,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-	let nowDate = new Date();
-	let newDate = this.getDate(nowDate)
-	console.log(newDate)
-	this.setData({
-		nowDate:newDate
-	})
+	
+  },
+  getTime:function(date){
+	  let hour = date.getHours();
+	  let minute = date.getMinutes();
+	  if (hour >= 1 && hour <= 9) {
+	  		  hour = "0" + hour;
+	  }
+	  if (minute >= 0 && minute <= 9) {
+	  		  minute = "0" + minute;
+	  }
+	  let newTime = hour+":"+minute+":00"
+	  return newTime
   },
   getDate:function(date){
 	  let year = date.getFullYear();
-	  var month = date.getMonth() + 1;
-	  var strDate = date.getDate();
+	  let month = date.getMonth() + 1;
+	  let strDate = date.getDate();
 	  if (month >= 1 && month <= 9) {
 		  month = "0" + month;
 	  }
